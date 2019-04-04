@@ -177,3 +177,28 @@ place all scripts in bin folder
 chmod +x backup.sh
 Edit .bashrc
 add PATH="$PATH:$HOME/bin"
+
+
+What is the purpose of the "she-bang" line in a bash script?
+To let the shell know that the file isnt a normal text file and that it should be interpreted as code using the interpreter defined in the she-bang line.
+
+
+
+
+
+
+
+
+Cron
+crontab -e
+(e is for edit)
+minute hour day-of-month month day-of-week
+
+* * * * * COMMAND
+every minute of every hour of every month for every month on any day of the week
+
+20 11 10 JUN SUN COMMAND
+11:20am on the 10th of Jun but only if the 10th of JUN is a Sunday
+
+0,15,30,45 * * * * COMMAND
+on the hour, 15 minutes past, 30 minutes past, 45 minutes past every hour of every day of the month regarless of what month or day of the week it is
