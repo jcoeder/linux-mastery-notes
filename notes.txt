@@ -148,12 +148,32 @@ find  / -maxdepth 4 -type f -size +1M -exec ls -lh {} \; | sort -k 5h > ~/filesi
 Bash Script
 
 Make 100 files and log
-
 #!/bin/bash
-
 mkdir ~/magic
 cd ~/magic
 touch file{1..100}
 ls -lh ~/magic > ~/magic/magic.log
 
+Backup Documents and Downloads folder for current users home directory and place in current working directory
+#!/bin/bash
+tar -cvzf backup.tar.gz ~/{Documents,Downloads}
 
+Backup Documents and Downloads folder for current users home directory and place in home directory
+#!/bin/bash
+tar -cvzf ~/backup.tar.gz ~/{Documents,Downloads}
+
+Backup Documents and Downloads folder for current users home directory and place in home directory without displaying output to screen (remove verbose)
+#!/bin/bash
+tar -czf ~/backup.tar.gz ~/{Documents,Downloads}
+
+Backup Documents and Downloads folder for current users home directory and place in home directory without displaying output to screen (remove verbose) and omit error messages
+#!/bin/bash
+tar -czf ~/backup.tar.gz ~/{Documents,Downloads} 2>/dev/null
+
+Make bash easier to use
+create 'bin' folder in home directory
+place all scripts in bin folder
+"Change Mode, Add eXecutable permissions"
+chmod +x backup.sh
+Edit .bashrc
+add PATH="$PATH:$HOME/bin"
