@@ -1,0 +1,159 @@
+Manual
+1 User Commands
+2 System Calls
+3 C Library Functions
+4 Devices and Special Files
+5 File Format and Conventions
+6 Games
+7 Miscellaneous
+8 System Administration
+
+Search man pages
+
+man -k which
+
+open a man page
+
+man 1 which 
+man 8 ping
+
+
+Piping and Redirection
+How would I pipe the standard output from command A to the standard input of command B
+
+A | B
+
+How would we use the tee command when piping together CommandA, CommandB and CommandC to save a snapshot of CommandB's output to snapshot.txt?
+
+CommandA | CommandB | tee snapshot.txt | CommandC
+
+How would I pipe data from CommandA  to CommandB  when CommandB  doesn't accept standard input and only accepts Command Line arguments?
+
+CommandA | xargs CommandB
+
+Standard Input = 0
+Standard Output = 1
+Standard Error = 2
+
+Overwrite with >
+Append with >>
+
+How would you redirect the standard output of the ls  command to a file called output.txt 
+
+ls > output.txt
+
+How would you redirect the standard output of the ls  command to output.txt  but at the same time redirect standard error to error.txt ?
+
+ls 1> output.txt 2> error.txt
+
+How would you use the find  command to start searching from the /etc  folder up to a maximum of 4 levels deep for all files that are over 100 KibiBytes in size?
+
+find /etc -maxdepth 4 -type f -size +100k
+
+How would you use the find  command to  search for every file below your home directory that is over 5 MebiBytes in size and execute the rm  command on the results
+
+find ~ -type f -size +5M -exec rm {} \;
+
+
+sort -k 5rh  would use a KEYDEF to sort data tabular data using the 5th Column of the data, but sort human readable data in a reverse manner.
+
+
+List the first 20 results of everything in /etc and sort them by the 5th(file size) column in a reverse order 
+
+ls -l /etc | head -n 20 | sort -k 5nr
+
+list every file in /etc that does not contain an e, sort it in reverse and save it to files.txt
+
+ls -F /etc | grep -v e | sort -r > files.txt
+
+Make tarball then compress tarball
+Create, Verbose, pass Files
+
+tar -cvf archive.tar file1.txt file[2-3].txt
+
+List file in tarball
+Test, pass File
+
+tar -tf archive.tar 
+
+Extract 
+eXtract, Verbose, pass File
+
+tar -xvf archve.tar
+
+g zip
+gzip archive.tar
+
+g unzip
+gunzip archive.tar.tz
+
+bzip2 archive.tar
+bunzip2 archive.tar.bz2
+
+zip archive.zip file[1-3.txt]
+unzip archive.zip
+
+Tar and compress
+tar -cvzf archive.tar.gz  file1.txt file[2-3].txt
+tar -cvjf archive.tar.bz2  file1.txt file[2-3].txt
+
+tar -xvzf archive.tar.gz
+tar -xvjf archive.tar.bz2
+
+
+
+In this task you are asked to create a folder called super_secret_stuff and inside that folder to
+place a file called top_secret.txt
+top_secret.txt may contain whatever content you wish.
+Once you have created the file, use the updatedb command and the locate command to find
+the path to top_secret.txt .
+Using redirection, save the path that the locate command gives you to a new file called
+secret_place.txt in your home directory.
+Hint: You will need to use sudo to gain the elevated privileges required to update the
+database.
+
+mkdir super_secret_stuff
+touch super_secret_stuff/top_secret.txt
+sudo updatedb
+locate -f "top_secret.txt" > ~/secret_place.txt
+
+
+In this task, you are going to create an advanced pipeline that will create a sorted list of
+the various file sizes on your system.
+Firstly, use the find command to search your entire file tree; starting from the /
+directory, for all files that are over 1 MebiByte in size. Use the maxdepth option to limit
+the find command’s search to only go 4 levels deep. The search should only show
+files, not directories.
+Use the -exec option of the find command to run the ls -lh command on each of
+those results.
+Hint: You will need to put sudo at the start of this command to access all required
+folders.
+
+sudo find  / -maxdepth 4 -type f -size +1M -exec ls -lh {} \;
+
+
+Sort the output from Part A using the sort command. You should sort the data so that
+the largest file sizes are at the top of the list and the smallest file sizes are at the bottom.
+Using redirection, output this data to a file called filesizes.txt in your home directory.
+Hint 1: You will need to use the –k option for the sort command and define a
+KEYDEF.
+Hint 2: The file sizes are the 5th column of data.
+Hint 3: You need to let the sort command to be able to deal with “human-readable”
+data.
+
+find  / -maxdepth 4 -type f -size +1M -exec ls -lh {} \; | sort -k 5h > ~/filesizes.txt
+
+
+
+Bash Script
+
+Make 100 files and log
+
+#!/bin/bash
+
+mkdir ~/magic
+cd ~/magic
+touch file{1..100}
+ls -lh ~/magic > ~/magic/magic.log
+
+
