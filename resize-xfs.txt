@@ -1,0 +1,9 @@
+
+#Resize XFS root from home and create 10G home
+umount /dev/mapper/centos_kvmx-home 
+lvremove /dev/mapper/centos_kvmx-home 
+lvcreate -L 10G -n home centos_kvmx
+mkfs.xfs /dev/centos_kvmx/home 
+mount /dev/mapper/centos_kvmx-home 
+lvextend -r -l +100%FREE /dev/mapper/centos_kvmx-root 
+df -h
