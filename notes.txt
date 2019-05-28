@@ -38,6 +38,9 @@ Standard Error = 2
 Overwrite with >
 Append with >>
 
+Redirect STD ERR with 2>
+Redirect STD OUTPUT and ERR 2>&1
+
 How would you redirect the standard output of the ls  command to a file called output.txt 
 
 ls > output.txt
@@ -202,3 +205,47 @@ every minute of every hour of every month for every month on any day of the week
 
 0,15,30,45 * * * * COMMAND
 on the hour, 15 minutes past, 30 minutes past, 45 minutes past every hour of every day of the month regarless of what month or day of the week it is
+
+
+
+
+
+
+GREP
+Returns everything ending with 'world'
+grep 'world$' file
+
+Case insensitive
+grep -i world file
+
+Everything that starts with and ends with linuxacadamy
+grep -i '^linuxacademy$' file
+
+Lowercase or uppercase L
+grep [lL]inuxacadamy file
+
+Do not match linux
+grep '[^linux]' file
+
+Anything starting with l and ending with x
+grep 'l...x' file
+
+
+? - Proceeding item is optional and matched at most one time
++ - Match one or more times
+
+
+
+
+
+
+REGEX
+grep \? is the same as grep -E ?
+
+
+
+
+
+RANDOM
+Make many files at once
+touch{file1,file2,file3}
